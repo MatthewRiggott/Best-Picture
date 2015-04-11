@@ -53,5 +53,5 @@ gem 'shoulda-matchers', group: [:development, :test], require: false
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'fb_graph2'
+gem "koala", "~> 2.0"
 gem 'foundation-rails'
