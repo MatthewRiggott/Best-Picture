@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :identities
+  has_many :contests
 
 
   TEMP_EMAIL_PREFIX = 'change@me'
