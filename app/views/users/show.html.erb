@@ -1,0 +1,17 @@
+Hi <%= @user.name %>
+
+<% contest = @user.contests.first %>
+<% photos = contest.photos %>
+
+<% highest_voted = 0 %>
+<% photo_id = 0 %>
+<% photo_url = "" %>
+<% photos.each do |photo| %>
+  <% photo_id = photo.id if photo.vote_count > highest_voted %>
+  <% photo_url = photo.url if photo.vote_count > highest_voted %>
+  <% highest_voted = photo.vote_count if photo.vote_count > highest_voted %>
+<% end %>
+
+<p> Your best photo has: <%= highest_voted %> votes! </p>
+<%= image_tag(photo_url) %>
+

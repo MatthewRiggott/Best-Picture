@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :contests
+  resources :contests do
+    resources :votes, only: [:create, :new]
+  end
+
+  resources :users, only: [:show]
+
   root 'homes#index'
   devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
 
