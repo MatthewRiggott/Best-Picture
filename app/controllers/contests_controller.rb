@@ -10,6 +10,8 @@ class ContestsController < ApplicationController
   # GET /contests/1
   # GET /contests/1.json
   def show
+    @contest = Contest.find(params[:id])
+    @photos = @contest.photos
   end
 
   # GET /contests/new
