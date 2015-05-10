@@ -16,7 +16,13 @@ class ContestsController < ApplicationController
 
   # GET /contests/new
   def new
-    @contest = Contest.new
+    current_user.get_pictures
+    @contest = Contest.new(user_id: current_user.id)
+    if @contest.save
+       redirect_to contest_photos_path(@contest)
+    else
+      render :new
+    end
   end
 
   # GET /contests/1/edit
@@ -26,17 +32,7 @@ class ContestsController < ApplicationController
   # POST /contests
   # POST /contests.json
   def create
-    @contest = Contest.new(contest_params)
 
-    respond_to do |format|
-      if @contest.save
-        format.html { redirect_to @contest, notice: 'Contest was successfully created.' }
-        format.json { render :show, status: :created, location: @contest }
-      else
-        format.html { render :new }
-        format.json { render json: @contest.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /contests/1
@@ -71,6 +67,6 @@ class ContestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contest_params
-      params.require(:contest).permit(:user_id)
+      # params.require(:contest).permit(:photo_id)
     end
 end

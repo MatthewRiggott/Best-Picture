@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :identities
   has_many :contests
-
+  has_many :photos
 
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
@@ -13,10 +13,13 @@ class User < ActiveRecord::Base
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 
-  def get_pictures
+  def get_pictures()
+
     access_token = self.access
     facebook = Koala::Facebook::API.new(access_token)
-    return facebook.get_object("me?fields=name,photos")
+    facebook.get_object("me?fields=name,photos")["photos"]["data"].each do |photo|
+      result = Photo.create(url: photo["images"][2]["source"], user_id: self.id) unless photo["images"][2].nil?
+    end
   end
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
@@ -42,7 +45,8 @@ class User < ActiveRecord::Base
           access: auth.credentials.token
         )
         user.skip_confirmation!
-        user.save!
+        user.save
+
       end
     end
 

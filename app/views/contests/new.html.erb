@@ -1,5 +1,14 @@
 <h1>New Contest</h1>
 
-<%= render 'form' %>
 
 <%= link_to 'Back', contests_path %>
+<div class="normalize">
+  <ul>
+    <% current_user.photos.each do |photo| %>
+      <li><%= link_to  image_tag(photo.url), contests_path, method: :post %></li>
+    <% end %>
+  </ul>
+</div>
+
+
+unless photo["images"][2].nil?

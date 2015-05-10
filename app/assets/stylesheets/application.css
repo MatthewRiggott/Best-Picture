@@ -19,3 +19,7 @@
   background-color: #fff;
 }
 */
+
+.normalize img {
+  width: 250px;
+}

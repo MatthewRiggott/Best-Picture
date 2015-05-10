@@ -7,7 +7,7 @@ class VotesController < ApplicationController
       if vote.save
         photo.vote_count += 1
         photo.save
-        render :new
+        redirect_to user_path(current_user)
       else
         render :new
       end

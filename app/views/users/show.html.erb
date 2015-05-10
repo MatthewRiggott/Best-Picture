@@ -1,6 +1,7 @@
 Hi <%= @user.name %>
-
+<% if @user.contests.exists? %>
 <% contest = @user.contests.first %>
+
 <% photos = contest.photos %>
 
 <% highest_voted = 0 %>
@@ -14,4 +15,6 @@ Hi <%= @user.name %>
 
 <p> Your best photo has: <%= highest_voted %> votes! </p>
 <%= image_tag(photo_url) %>
-
+<%else %>
+<h1> you have no contests yet </h1>
+<% end %>
