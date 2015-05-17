@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
   has_many :identities
   has_many :contests
   has_many :photos, through: :contests
-  
+
+  after_create :get_pictures
 
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
@@ -17,6 +18,7 @@ class User < ActiveRecord::Base
   def get_pictures
     access_token = self.access
     facebook = Koala::Facebook::API.new(access_token)
+    binding.pry
     return facebook.get_object("me?fields=name,photos")
   end
 

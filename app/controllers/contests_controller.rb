@@ -1,14 +1,10 @@
 class ContestsController < ApplicationController
   before_action :set_contest, only: [:show, :edit, :update, :destroy]
 
-  # GET /contests
-  # GET /contests.json
   def index
     @contests = Contest.all
   end
 
-  # GET /contests/1
-  # GET /contests/1.json
   def show
     @contest = Contest.find(params[:id])
     @photos = @contest.photos
