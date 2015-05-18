@@ -47,4 +47,11 @@ class ContestsController < ApplicationController
       redirect_to contests_url, notice: 'Contest was successfully destroyed.'
     end
   end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_contest
+      @contest = Contest.find(params[:id])
+    end
+
 end
