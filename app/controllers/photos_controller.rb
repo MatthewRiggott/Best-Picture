@@ -4,11 +4,9 @@ class PhotosController < ApplicationController
   def index
     @contest = params[:contest_id]
     @photos = current_user.photos
-
   end
 
   def update
-    binding.pry
     render :new
   end
 
