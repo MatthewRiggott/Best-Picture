@@ -1,5 +1,6 @@
 <h1>hello</h1>
-<%= link_to 'vote on other user', contest_path(User.find(3).contests.last) %>
+
+<%= link_to 'vote on other user', contest_path(User.find(1).contests.last) %>
 
 <div class="normalize">
 <% @photos.each do |photo| %>
