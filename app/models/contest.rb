@@ -13,4 +13,8 @@ class Contest < ActiveRecord::Base
       result = Photo.create(url: photo["images"][2]["source"], user_id: self.id) unless photo["images"][2].nil?
     end
   end
+
+  def self.random_contest
+    Contest.all.sample
+  end
 end

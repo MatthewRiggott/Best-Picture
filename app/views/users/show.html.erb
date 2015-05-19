@@ -1,20 +1,22 @@
-Hi <%= @user.name %>
+Hi <%= @user.name %>,
 <% if @user.contests.exists? %>
-<% contest = @user.contests.first %>
+  <% contest = @user.contests.first %>
+  <% photos = contest.photos %>
 
-<% photos = contest.photos %>
+  <% highest_voted = 0 %>
+  <% photo_id = 0 %>
+  <% photo_url = "" %>
+  <% photos.each do |photo| %>
+    <% photo_id = photo.id if photo.vote_count > highest_voted %>
+    <% photo_url = photo.url if photo.vote_count > highest_voted %>
+    <% highest_voted = photo.vote_count if photo.vote_count > highest_voted %>
+  <% end %>
 
-<% highest_voted = 0 %>
-<% photo_id = 0 %>
-<% photo_url = "" %>
-<% photos.each do |photo| %>
-  <% photo_id = photo.id if photo.vote_count > highest_voted %>
-  <% photo_url = photo.url if photo.vote_count > highest_voted %>
-  <% highest_voted = photo.vote_count if photo.vote_count > highest_voted %>
+  <p> The people have spoken ... this is your best photo! </p>
+  <%= image_tag(photo_url) %>
+  <%else %>
+  <h1> you have no contests yet </h1>
 <% end %>
 
-<p> Your best photo has: <%= highest_voted %> votes! </p>
-<%= image_tag(photo_url) %>
-<%else %>
-<h1> you have no contests yet </h1>
-<% end %>
+<%= link_to "Vote on another contest", contest_path(Contest.random_contest) %>
+<%= link_to "Make a new contest", new_contest_path %> (actually this doesn't work yet)

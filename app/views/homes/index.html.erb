@@ -1,3 +1,5 @@
 <p>
  <%= link_to 'create contest', new_contest_path %>
 </p>
+
+<%= link_to "Vote on a contest", contest_path(Contest.random_contest) %>

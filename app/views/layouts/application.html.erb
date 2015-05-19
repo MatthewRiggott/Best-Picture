@@ -10,7 +10,7 @@
   <nav class="top-bar">
     <ul class="title-area">
       <li class="name">
-        <h1><a href="/">Best Photo</a></h1>
+        <h1><a href="/">Best Photo</a>
       </li>
     </ul>
 
@@ -22,6 +22,7 @@
           <li><%= link_to 'Sign Up', new_user_registration_path %></li>
           <li><%= link_to 'Sign In', new_user_session_path %></li>
         <%- end -%>
+          <li><%= link_to 'My Contests', user_path(current_user) %></li>
       </ul>
     </section>
   </nav>
