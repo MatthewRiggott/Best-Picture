@@ -18,5 +18,7 @@ Hi <%= @user.name %>,
   <h1> you have no contests yet </h1>
 <% end %>
 
-<%= link_to "Vote on another contest", contest_path(Contest.random_contest) %>
+<% if Contest.random_contest %>
+  <%= link_to "Vote on another contest", contest_path(Contest.random_contest) %>
+<% end %>
 <%= link_to "Make a new contest", new_contest_path %> (actually this doesn't work yet)

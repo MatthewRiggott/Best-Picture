@@ -35,7 +35,8 @@ class User < ActiveRecord::Base
           password: Devise.friendly_token[0, 20],
           access: auth.credentials.token
         )
-        user.skip_confirmation!
+        # .skip_confirmation! was causing method error and works without this
+        # user.skip_confirmation!
         user.save
 
       end

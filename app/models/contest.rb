@@ -8,6 +8,7 @@ class Contest < ActiveRecord::Base
 
   def get_pictures
     access_token = User.find(self.user_id).access
+    binding.pry
     facebook = Koala::Facebook::API.new(access_token)
     facebook.get_object("me?fields=name,photos")["photos"]["data"].each do |photo|
       result = Photo.create(url: photo["images"][2]["source"], user_id: self.id) unless photo["images"][2].nil?
