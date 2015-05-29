@@ -14,6 +14,10 @@ class PhotosController < ApplicationController
     @contest = Contest.find(params[:contest_id])
     photo = Photo.find(params[:id])
     photo.update(contest_id: @contest.id)
-    redirect_to contest_photos_path(@contest)
+    if @contest.max_pics
+      redirect_to edit_contest_path(@contest)
+    else
+      redirect_to contest_photos_path(@contest)
+    end
   end
 end

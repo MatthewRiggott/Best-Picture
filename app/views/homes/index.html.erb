@@ -2,4 +2,6 @@
  <%= link_to 'create contest', new_contest_path %>
 </p>
 
-<%= link_to "Vote on a contest", contest_path(Contest.random_contest) %>
+<% if Contest.all.count > 0 %>
+  <%= link_to "Vote on a contest", contest_path(Contest.random_contest) %>
+<% end %>

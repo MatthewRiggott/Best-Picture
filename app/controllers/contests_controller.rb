@@ -1,4 +1,5 @@
 class ContestsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :show]
   before_action :set_contest, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -20,6 +21,8 @@ class ContestsController < ApplicationController
   end
 
   def edit
+    @contest = Contest.find(params[:id])
+    @photos = @contest.photos
   end
 
   def create
@@ -34,6 +37,7 @@ class ContestsController < ApplicationController
   end
 
   def update
+    binding.pry
     if @contest.update(contest_params)
       redirect_to @contest, notice: 'Contest was successfully updated.'
     else
@@ -43,7 +47,7 @@ class ContestsController < ApplicationController
 
   def destroy
     if @contest.destroy
-      redirect_to contests_url, notice: 'Contest was successfully destroyed.'
+      redirect_to new_contest_path, notice: 'Contest was successfully destroyed.'
     end
   end
 
