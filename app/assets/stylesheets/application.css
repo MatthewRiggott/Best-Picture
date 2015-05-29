@@ -20,6 +20,11 @@
 }
 */
 
+.button {
+	color: white
+}
+
+
 .normalize img {
   width: 250px;
 }
@@ -31,4 +36,8 @@
 .container {
   margin-top: 1em;
   margin-left: 2em;
+}
+
+.centered-button {
+	text-align: center;
 }

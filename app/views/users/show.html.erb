@@ -1,4 +1,4 @@
-Hi <%= @user.name %>,
+<h2> Hi <%= @user.name %>,</h2>
 <% if @user.contests.exists? %>
   <% contest = @user.contests.first %>
   <% photos = contest.photos %>
@@ -11,15 +11,18 @@ Hi <%= @user.name %>,
     <% photo_url = photo.url if photo.vote_count > highest_voted %>
     <% highest_voted = photo.vote_count if photo.vote_count > highest_voted %>
   <% end %>
-
-  <p> The people have spoken ... this is your best photo! </p>
-  <%= image_tag(photo_url) %>
-  <%else %>
-  <h1> you have no contests yet </h1>
+  
+  <!-- Below is a very hacky way of checking if user has a contest with any photos -->
+  <% if photo_url != "" %>
+    <h3> The people have spoken ... this is your best photo! </h3>
+    <%= image_tag(photo_url) %>
+  <% else %>
+  <h3> You have no contests yet, or no votes on your contest. </h3>
+  <% end %>
 <% end %>
 
 <% if Contest.exists?(1) %>
-  <%= link_to "Vote on another contest", contest_path(Contest.random_contest) %>
+  <%= link_to "Vote on another contest", contest_path(Contest.all.sample) %>
 <% end %>
 
 <%= link_to "Make a new contest", new_contest_path %>
