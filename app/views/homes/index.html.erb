@@ -1,7 +1,13 @@
-<p>
- <%= link_to 'create contest', new_contest_path %>
-</p>
+<div class="row">
+ <div class="medium-12 columns centered-button create-contest-button">
+ 	 <%= link_to 'Create Contest', new_contest_path, class: "button large" %>
+ <div>
+<div>
 
-<% if Contest.all.count > 0 %>
-  <%= link_to "Vote on a contest", contest_path(Contest.random_contest) %>
-<% end %>
+<div class="row">
+	<div class="medium-12 columns centered-button vote-button">
+		<% if Contest.all.count > 0 %>
+		  <%= link_to "Vote on a contest", contest_path(Contest.all.sample), class: "button large" %>
+		<% end %>
+	<div>
+<div>

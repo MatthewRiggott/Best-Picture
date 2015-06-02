@@ -14,14 +14,15 @@ class Contest < ActiveRecord::Base
     end
   end
 
-  def random_contest
-    contest_to_vote_on = Contest.all.sample
-    if contest_to_vote_on == self
-      self.random_contest
-    else
-      contest_to_vote_on
-    end   
-  end
+  # This is breaking the app if there's only one contest
+  # def random_contest
+  #   contest_to_vote_on = Contest.all.sample
+  #   if contest_to_vote_on == self
+  #     self.random_contest
+  #   else
+  #     contest_to_vote_on
+  #   end   
+  # end
 
   def max_pics
     if self.photos.count >= 5 

@@ -1,0 +1,14 @@
+a.contest-image img {
+/*  max-width: 100%;
+  max-height: 300px;*/
+}
+
+.contest-image {	
+	margin-top: 2em;
+}
+
+/* Not entirely sure why this is the only way I can get my contest photo images smaller */
+img {
+  max-width: 100%;
+  max-height: 250px;
+}

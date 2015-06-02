@@ -21,7 +21,6 @@ class ContestsController < ApplicationController
   end
 
   def edit
-    @contest = Contest.find(params[:id])
     @photos = @contest.photos
   end
 
@@ -37,7 +36,6 @@ class ContestsController < ApplicationController
   end
 
   def update
-    binding.pry
     if @contest.update(contest_params)
       redirect_to @contest, notice: 'Contest was successfully updated.'
     else
@@ -52,7 +50,6 @@ class ContestsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_contest
       @contest = Contest.find(params[:id])
     end
