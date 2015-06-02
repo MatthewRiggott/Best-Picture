@@ -1,10 +1,45 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
 <h1>Select five photos for your contest.</h1>
 <% if @contest.photos.count == 5 %>
 	<h2><%= link_to "Create contest", edit_contest_path(@contest) %></h2>
 <% end %>
 
-<div class="normalize">
-<% @photos.each do |photo| %>
- <%= link_to image_tag(photo.url), edit_contest_photo_path(@contest, photo), class: "contest-image" %>
-<% end %>
+<div class="button submit-button">
+Submit Photos
 </div>
+
+
+<div class="normalize">
+	<% @photos.each do |photo| %>
+	 <%= image_tag(photo.url, class: "contest-image", id: photo.id) %>
+	<% end %>
+</div>
+
+<script>
+var current_url = location.href
+
+$( function() {
+	$('img').click( function() {
+		$(this).toggleClass('chosen-photo');
+	});
+});
+
+$('.submit-button').click( function() {
+		$.ajax({
+		  type: "GET",
+		  url: <%= root_path %>,
+		  success: success
+		});
+	});
+</script>
+
+
+
+
+ $.ajax({
+    method: 'PUT',
+    url: '/',
+    data: { user_latitude: user_latitude,  user_longitude: user_longitude },
+    dataType: 'json'
+  });

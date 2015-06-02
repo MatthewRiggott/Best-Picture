@@ -1,5 +1,4 @@
 class VotesController < ApplicationController
-
   def create
     photo = Photo.find(params[:photo])
     contest = Contest.find(params[:contest_id])
@@ -10,7 +9,7 @@ class VotesController < ApplicationController
         # TODO instead of sending them to a random contest after voting, should go to a random contest they *haven't* voted on yet.
         redirect_to contest_path(Contest.all.sample)
       else
-        render :new
+        redirect_to contest_path(Contest.all.sample), notice: vote.errors.messages[:user][0]
       end
   end
 end
