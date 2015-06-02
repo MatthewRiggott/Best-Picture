@@ -1,8 +1,9 @@
 <h1>Select five photos for your contest.</h1>
+<% if @contest.photos.count == 5 %>
+	<h2><%= link_to "Create contest", edit_contest_path(@contest) %></h2>
+<% end %>
 
-<h2><%= link_to "View your contest", edit_contest_path(@contest) %></h2>
 <div class="normalize">
-
 <% @photos.each do |photo| %>
  <%= link_to image_tag(photo.url), edit_contest_photo_path(@contest, photo), class: "contest-image" %>
 <% end %>

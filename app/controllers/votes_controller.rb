@@ -8,7 +8,7 @@ class VotesController < ApplicationController
         photo.vote_count += 1
         photo.save
         # TODO instead of sending them to a random contest after voting, should go to a random contest they *haven't* voted on yet.
-        redirect_to contest_path(contest.random_contest)
+        redirect_to contest_path(Contest.all.sample)
       else
         render :new
       end
