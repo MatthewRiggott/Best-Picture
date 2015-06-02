@@ -2,17 +2,17 @@
 
 <div class="row">
 	<% @photos[0..2].each do |photo| %>
-	 <div class="medium-4 column contest-image">
-	 	<%= link_to image_tag(photo.url), contest_votes_path(@contest, photo: photo), method: :post, action: :create %>
-	 </div>
+		<div class="medium-4 column contest-image">
+			<%= link_to image_tag(photo.url), contest_votes_path(@contest, photo: photo), method: :post, action: :create %>
+		</div>
 	<% end %>
 </div>
 
 <div class="row">
 	<% @photos[3..4].each do |photo| %>
-	 <div class="medium-4 column end contest-image">
-	 	<%= link_to image_tag(photo.url), contest_votes_path(@contest, photo: photo), method: :post, action: :create %>
-	 </div>
+		<div class="medium-4 column end contest-image">
+			<%= link_to image_tag(photo.url), contest_votes_path(@contest, photo: photo), method: :post, action: :create %>
+		</div>
 	<% end %>
 </div>
 
