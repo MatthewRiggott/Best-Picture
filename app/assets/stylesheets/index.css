@@ -1,8 +1,14 @@
+.splash-container {
+	background-image: url("selfie-image.png");
+	height: 800px;
+	margin-top: 5em;
+}
+
 .create-contest-button {
-	margin-top: 10em;
+	margin-top: 15em;
 }
 
 .vote-button {
-	margin-top: 4em;
+	margin-top: 15em;
 }
 

@@ -16,3 +16,7 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+
+body {
+	background: black;
+}

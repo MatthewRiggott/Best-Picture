@@ -16,7 +16,11 @@ class ContestsController < ApplicationController
     if @contest.save
        redirect_to contest_photos_path(@contest)
     else
-      render :new
+      if current_user.contests.exists?
+        redirect_to root_path, notice: 'You\'ve already created a contest. Delete your contest if you want to make a new one.'
+      else
+        redirect_to root_path, notice: 'Something went wrong'
+      end  
     end
   end
 
