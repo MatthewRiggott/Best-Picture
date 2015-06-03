@@ -2,7 +2,7 @@ class PhotosController < ApplicationController
 
 
   def index
-    @contest = params[:contest_id]
+    @contest = Contest.find(params[:contest_id])
     @photos = current_user.photos
   end
 

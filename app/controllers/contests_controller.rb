@@ -49,7 +49,7 @@ class ContestsController < ApplicationController
 
   def destroy
     if @contest.destroy
-      redirect_to new_contest_path, notice: 'Contest was successfully destroyed.'
+      redirect_to user_path(current_user), notice: 'Contest was successfully destroyed.'
     end
   end
 

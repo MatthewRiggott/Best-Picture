@@ -1,10 +1,18 @@
-<h3><%= link_to "Recreate This Contest", contest_path(@contest), method: :delete %></h3>
-Ready to publish? You must vote on two other users contest first!
-<!-- was contest_path(@contest.random_contest) but changing temporarily, it was causing a stack overflow when only contest exists -->
-<h3><%= link_to "Vote", contest_path(Contest.all.sample) %></h3>
+<p>Ready to publish? You must vote on two other users' contest first! Your contest will be automatically published after you've voted on two contests.</p>
 
-<p>
-  <% @photos.each do |photo| %>
-   <div class="contest-image"><%= link_to image_tag(photo.url), contest_votes_path(@contest, photo: photo), method: :post, action: :create %></div>
-  <% end %>
-</p>
+<!-- was contest_path(@contest.random_contest) but changing temporarily, it was causing a stack overflow when only 1 contest exists -->
+<%= link_to "Vote", contest_path(Contest.all.sample), class: :button %>
+
+<p>Picked the wrong photos?</p> <%= link_to "Recreate This Contest", contest_path(@contest), class: :button, method: :delete %>
+
+<div class="row">
+	<% @photos[0..2].each do |photo| %>
+	 <div class="medium-4 column contest-image"><%= image_tag(photo.url) %></div>
+	<% end %>
+<div>
+
+<div class="row">
+	<% @photos[3..4].each do |photo| %>
+	 <div class="medium-4 column end contest-image"><%= image_tag(photo.url) %></div>
+	<% end %>
+<div>
