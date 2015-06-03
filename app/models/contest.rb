@@ -3,7 +3,6 @@ class Contest < ActiveRecord::Base
   belongs_to :user
 
   validates :user_id, uniqueness: true
-
   after_create :get_pictures
 
   def get_pictures
@@ -21,15 +20,11 @@ class Contest < ActiveRecord::Base
   #     self.random_contest
   #   else
   #     contest_to_vote_on
-  #   end   
+  #   end
   # end
 
   def max_pics
-    if self.photos.count >= 5 
-      true
-    else
-      false
-    end
+    return self.photos.count >= 5
   end
 
 end
