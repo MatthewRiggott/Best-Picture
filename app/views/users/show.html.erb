@@ -1,34 +1,40 @@
-<h3> Hi <%= @user.name %>,</h3>
-<% if @user.contests.exists? %>
+<div class="container">
+  <p class="large-text"> Hi <%= @user.name %>,</p>
   <% contest = @user.contests.first %>
-  <% photos = contest.photos %>
 
-    <% highest_voted = 0 %>
-    <% photo_id = 0 %>
-    <% photo_url = "" %>
-    <% photos.each do |photo| %>
-      <% photo_id = photo.id if photo.vote_count > highest_voted %>
-      <% photo_url = photo.url if photo.vote_count > highest_voted %>
-      <% highest_voted = photo.vote_count if photo.vote_count > highest_voted %>
-    <% end %>
+  <% if @user.contests.exists? %>
+    <% photos = contest.photos %>
+      <% highest_voted = 0 %>
+      <% photo_id = 0 %>
+      <% photo_url = "" %>
+      <% photos.each do |photo| %>
+        <% photo_id = photo.id if photo.vote_count > highest_voted %>
+        <% photo_url = photo.url if photo.vote_count > highest_voted %>
+        <% highest_voted = photo.vote_count if photo.vote_count > highest_voted %>
+      <% end %>
 
-    <!-- Below is a very hacky way of checking if user has a contest with any photos -->
-    <% if photo_url != "" %>
-      <h3> The people have spoken ... this is your best photo! </h3>
-      <%= image_tag(photo_url) %>
+      <!-- Below is a very hacky way of checking if user has a contest with any photos -->
+      <% if photo_url != "" && @user.votes.count >= 2 %>
+        <p class="medium-text"> The people have spoken ... this is your best photo! </p>
+        <%= image_tag(photo_url) %>
+      <% else %>
+      <p class="medium-text"> You need to vote on two contests before your results are shown! </p>
+      <% end %>
     <% else %>
-      <h3> You have no contests yet, or no votes on your contest. </h3>
+      <p class="medium-text"> You have no contests yet, make one! </p>
     <% end %>
-  <% end %>
 
-  <div>
-    <% if Contest.exists?(1) %>
-      <%= link_to "Vote on another contest", contest_path(Contest.all.sample) %>
-    <% end %>
-    <% if @user.contests.exists? %>
-      <%= link_to "View contest", contest_path(contest) %>
-      <%= link_to "Delete contest", contest_path(contest), method: :delete %>
-    <% else %>
-      <%= link_to "Make a new contest", new_contest_path, class: "button" %>
-    <% end %>
-  </div>
+    <div>
+      <% if @user.contests.exists? %>
+        <%= link_to "View your contest", contest_path(contest), class: "button tiny" %>
+        <%= link_to "Delete your contest", contest_path(contest), method: :delete, class: "button tiny" %>
+      <% else %>
+        <%= link_to "Make a new contest", new_contest_path, class: "button tiny" %>
+      <% end %>
+    </div>
+    <div>
+      <% if Contest.exists?(1) %>
+        <%= link_to "Vote on a contest", contest_path(Contest.all.sample), class: "button" %>
+      <% end %>
+    </div>
+</div>

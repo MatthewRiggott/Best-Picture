@@ -1,0 +1,11 @@
+.top-bar {
+  background-color: white;
+}
+
+.top-bar .name h1 a {
+  color: black;
+}
+
+.top-bar-section ul {
+  background-color: white;
+}

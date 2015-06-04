@@ -42,3 +42,11 @@
 .centered-button {
 	text-align: center;
 }
+
+.large-text {
+	font-size: 24px;
+}
+
+.medium-text {
+	font-size: 16px;
+}
