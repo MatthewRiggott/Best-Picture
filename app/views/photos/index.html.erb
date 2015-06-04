@@ -11,7 +11,7 @@ Submit Photos
 
 <div class="normalize">
 	<% @photos.each do |photo| %>
-	 <%= image_tag(photo.url, class: "contest-image", id: photo.id) %>
+		<%= link_to image_tag(photo.url), edit_contest_photo_path(@contest, photo), class: "contest-image" %>
 	<% end %>
 </div>
 
@@ -34,4 +34,3 @@ var current_url = location.href
 		});
 	});
 </script>
-

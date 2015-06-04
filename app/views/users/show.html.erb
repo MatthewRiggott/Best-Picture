@@ -25,10 +25,10 @@
     <% if Contest.exists?(1) %>
       <%= link_to "Vote on another contest", contest_path(Contest.all.sample) %>
     <% end %>
-
-    <%= link_to "View contest", contest_path(contest) %>
-    <%= link_to "Delete contest", contest_path(contest), method: :delete %>
+    <% if @user.contests.exists? %>
+      <%= link_to "View contest", contest_path(contest) %>
+      <%= link_to "Delete contest", contest_path(contest), method: :delete %>
+    <% else %>
+      <%= link_to "Make a new contest", new_contest_path, class: "button" %>
+    <% end %>
   </div>
-  <% else %>
-  <%= link_to "Make a new contest", new_contest_path, class: "button" %>
-<% end %>
