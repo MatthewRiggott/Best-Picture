@@ -9,7 +9,6 @@ class Contest < ActiveRecord::Base
   def get_pictures
     access_token = User.find(self.user_id).access
     facebook = Koala::Facebook::API.new(access_token)
-    binding.pry
     facebook.get_object("me?fields=name,photos")["photos"]["data"].each do |photo|
       result = Photo.create(url: photo["images"][2]["source"], user_id: self.id) unless photo["images"][2].nil?
     end
@@ -22,11 +21,11 @@ class Contest < ActiveRecord::Base
   #     self.random_contest
   #   else
   #     contest_to_vote_on
-  #   end   
+  #   end
   # end
 
   def max_pics
-    if self.photos.count >= 5 
+    if self.photos.count >= 5
       true
     else
       false
