@@ -3,23 +3,23 @@
   <% contest = @user.contests.first %>
   <% photos = contest.photos %>
 
-  <% highest_voted = 0 %>
-  <% photo_id = 0 %>
-  <% photo_url = "" %>
-  <% photos.each do |photo| %>
-    <% photo_id = photo.id if photo.vote_count > highest_voted %>
-    <% photo_url = photo.url if photo.vote_count > highest_voted %>
-    <% highest_voted = photo.vote_count if photo.vote_count > highest_voted %>
-  <% end %>
-  
-    <!-- Below is a very hacky way of checking if user has a contest with any photos -->
-    <% if photo_url != "" %>
-      <h4> The people have spoken ... this is your best photo! </h4>
-      <%= image_tag(photo_url) %>
-    <% else %>
-    <h3> You don't have any votes on your contest yet. </h3>
+    <% highest_voted = 0 %>
+    <% photo_id = 0 %>
+    <% photo_url = "" %>
+    <% photos.each do |photo| %>
+      <% photo_id = photo.id if photo.vote_count > highest_voted %>
+      <% photo_url = photo.url if photo.vote_count > highest_voted %>
+      <% highest_voted = photo.vote_count if photo.vote_count > highest_voted %>
     <% end %>
 
+    <!-- Below is a very hacky way of checking if user has a contest with any photos -->
+    <% if photo_url != "" %>
+      <h3> The people have spoken ... this is your best photo! </h3>
+      <%= image_tag(photo_url) %>
+    <% else %>
+      <h3> You have no contests yet, or no votes on your contest. </h3>
+    <% end %>
+  <% end %>
 
   <div>
     <% if Contest.exists?(1) %>

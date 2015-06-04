@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_many :identities
   has_many :contests
   has_many :photos
+  has_many :votes
 
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
