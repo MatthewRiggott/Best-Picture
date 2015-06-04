@@ -20,12 +20,6 @@
 }
 */
 
-.middle-block {
-  background-image: image-url("photographer.png");
-	background-repeat:no-repeat;
-	background-size: cover;
-	background-position: bottom;
-}
 
 .button {
 	color: white

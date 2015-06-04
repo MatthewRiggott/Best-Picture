@@ -20,7 +20,7 @@ class ContestsController < ApplicationController
         redirect_to root_path, notice: 'You\'ve already created a contest. Delete your contest if you want to make a new one.'
       else
         redirect_to root_path, notice: 'Something went wrong'
-      end  
+      end
     end
   end
 
@@ -30,6 +30,7 @@ class ContestsController < ApplicationController
 
   def create
     # TODO need to add error messaging when a user tries to create a second contest. Can't do that currently.
+    # TODO also need to migrate #new functionality to #create for good RESTful design
     @contest = Contest.new(user_id: current_user.id)
 
     if @contest.save

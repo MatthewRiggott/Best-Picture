@@ -9,7 +9,6 @@
 Submit Photos
 </div>
 
-
 <div class="normalize">
 	<% @photos.each do |photo| %>
 	 <%= image_tag(photo.url, class: "contest-image", id: photo.id) %>
@@ -19,27 +18,20 @@ Submit Photos
 <script>
 var current_url = location.href
 
-$( function() {
-	$('img').click( function() {
-		$(this).toggleClass('chosen-photo');
-	});
-});
+// $( function() {
+// 	$('img').click( function() {
+// 		$(this).toggleClass('chosen-photo');
+// 	});
+// });
 
-$('.submit-button').click( function() {
+	$('.submit-button').click( function() {
 		$.ajax({
-		  type: "GET",
-		  url: <%= root_path %>,
-		  success: success
+	    url: 'contests/1/photos/1/edit',
+	    type: 'PATCH',
+	    success: function(result) {
+	       // Do I even need this??
+	    }
 		});
 	});
 </script>
 
-
-
-
- $.ajax({
-    method: 'PUT',
-    url: '/',
-    data: { user_latitude: user_latitude,  user_longitude: user_longitude },
-    dataType: 'json'
-  });
