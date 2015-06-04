@@ -1,9 +1,18 @@
 <div class="splash-container">
 	<div class="row">
+		<div class="splash-text-first medium-12 medium-centered column">
+			Hello I am large text
+		</div>
+		<div class="splash-text-second medium-12 medium-centered column">
+			This background is gray until we decide on an image
+		</div>
+	</div>
+
+	<div class="row">
 	 <div class="medium-6 columns centered-button create-contest-button">
 	 	 <%= link_to 'Create Contest', new_contest_path, class: "button large" %>
 	 </div>
-	
+
 		<div class="medium-6 columns centered-button vote-button">
 			<% if Contest.all.count > 0 %>
 			  <%= link_to "Vote on a contest", contest_path(Contest.all.sample), class: "button large" %>
@@ -11,5 +20,3 @@
 		</div>
 	</div>
 </div>
-
-

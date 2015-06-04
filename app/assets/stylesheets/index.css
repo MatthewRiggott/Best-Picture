@@ -1,14 +1,27 @@
 .splash-container {
-	background-image: url("selfie-image.png");
-	height: 800px;
-	margin-top: 5em;
+/* 	background-image: url("selfie-image.png");
+height: 800px; */
+	background-color: #e0dede;
+	height: 100%;
 }
 
 .create-contest-button {
-	margin-top: 15em;
+	margin-top: 5em;
 }
 
 .vote-button {
-	margin-top: 15em;
+	margin-top: 5em;
 }
 
+.splash-text-first {
+	color:white;
+	margin-top: 2em;
+	font-size: 36px;
+	text-align: center;
+}
+
+.splash-text-second {
+	color:white;
+	font-size: 24px;
+	text-align: center;
+}
