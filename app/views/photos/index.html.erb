@@ -1,36 +1,43 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-<h1>Select five photos for your contest.</h1>
-<% if @contest.photos.count == 5 %>
-	<h2><%= link_to "Create contest", edit_contest_path(@contest) %></h2>
-<% end %>
-
-<div class="button submit-button">
-Submit Photos
-</div>
-
-<div class="normalize">
-	<% @photos.each do |photo| %>
-		<%= link_to image_tag(photo.url), edit_contest_photo_path(@contest, photo), class: "contest-image" %>
+<div class="container">
+	<p class="large-text">Select five photos for your contest.</p>
+	<% if @contest.photos.count == 5 %>
+		<h2><%= link_to "Create contest", edit_contest_path(@contest) %></h2>
 	<% end %>
+
+	<div class="button submit-button">
+	Submit Photos
+	</div>
+
+	<div class="normalize">
+		<% @photos.each do |photo| %>
+			<%= image_tag(photo.url, class: "contest-image", id: photo.id) %>
+		<% end %>
+	</div>
 </div>
 
-Insert script tag here
+<script>
 var current_url = location.href
+var selectedPhotos = []
 
-// $( function() {
-// 	$('img').click( function() {
-// 		$(this).toggleClass('chosen-photo');
-// 	});
-// });
-
-	$('.submit-button').click( function() {
-		$.ajax({
-	    url: 'contests/1/photos/1/edit',
-	    type: 'PATCH',
-	    success: function(result) {
-	       // Do I even need this??
-	    }
-		});
+$( function() {
+	$('img').click( function() {
+		$(this).toggleClass('chosen-photo');
 	});
-	Insert script closing tag here
+});
+
+$('.submit-button').click( function() {
+
+	$('.chosen-photo').each(function(i, obj) {
+		selectedPhotos.push(obj.id)
+	});
+
+	$.ajax({
+    url: 'photos/1/edit',
+    type: 'GET',
+		dataType: 'json',
+		data: { selectedPhotos: selectedPhotos }
+	});
+});
+</script>

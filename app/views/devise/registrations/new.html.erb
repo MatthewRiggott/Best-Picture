@@ -1,5 +1,8 @@
-<h2>Sign up</h2>
-
-
-
-<%= render "devise/shared/links" %>
+<div class="row">
+	<div class="medium-12 column centered-button sign-in-facebook">
+		<%- if devise_mapping.omniauthable? %>
+		  <%- resource_class.omniauth_providers.each do |provider| %>
+		    <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider), class: "button large" %><br />
+		  <% end -%>
+		<% end -%>
+</div>
