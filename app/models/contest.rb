@@ -24,6 +24,6 @@ class Contest < ActiveRecord::Base
   # end
 
   def max_pics
-    self.photos.count >= 5
+    self.photos.count >= 4
   end
 end

@@ -49,7 +49,15 @@ class ContestsController < ApplicationController
   end
 
   def destroy
-    if @contest.destroy
+    @destroyed = @contest.destroy
+    if @destroyed
+      photos = @destroyed.photos
+      ArchivedContest.transaction do
+        old_contest = ArchivedContest.create(user: current_user)
+        photos.each do |photo|
+          ArchivedVote.create(photo: photo, votes: photo.vote_count, archived_contest_id: old_contest.id)
+        end
+      end
       redirect_to user_path(current_user), notice: 'Contest was successfully destroyed.'
     end
   end
