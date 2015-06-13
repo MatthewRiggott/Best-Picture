@@ -6,9 +6,9 @@
 		<h2><%= link_to "Create contest", edit_contest_path(@contest) %></h2>
 	<% end %>
 
-	<div class="button submit-button">
-	Submit Photos
-	</div>
+
+		<%= button_tag "Submit", class: "button submit-button hidden", id: "submit-button" %>
+
 
 	<div class="normalize">
 		<% @photos.each do |photo| %>
@@ -24,6 +24,12 @@ var selectedPhotos = []
 $( function() {
 	$('img').click( function() {
 		$(this).toggleClass('chosen-photo');
+		if ($('.chosen-photo').length === 5) {
+			$('#submit-button').removeClass('hidden')
+		}
+		else {
+			$('#submit-button').addClass('hidden')
+		}
 	});
 });
 
@@ -33,11 +39,11 @@ $('.submit-button').click( function() {
 		selectedPhotos.push(obj.id)
 	});
 
-	$.ajax({
-    url: 'photos/1/edit',
-    type: 'GET',
-		dataType: 'json',
-		data: { selectedPhotos: selectedPhotos }
-	});
+	 $.ajax({
+   url: 'photos/1',
+   type: 'PATCH',
+        dataType: 'json',
+        data: { selectedPhotos: selectedPhotos }
+    });
 });
 </script>

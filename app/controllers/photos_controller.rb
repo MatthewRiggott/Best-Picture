@@ -7,11 +7,28 @@ class PhotosController < ApplicationController
 
   def update
     # Using edit rather than update because I'm not sure how PATCH requests work with AJAX
+    # You are a noob.
+    @contest = Contest.find(params[:contest_id])
+    if params[:selectedPhotos].count != 5
+      render :index, notice: "Please select 5 photos before submitting"
+    else
+      params[:selectedPhotos].each do |photo|
+        ruby_photo_object = Photo.find(photo.to_i)
+        ruby_photo_object.update(contest_id: @contest.id)
+      end
+      binding.pry
+      render :back
+    end
+
   end
 
   def edit
     @contest = Contest.find(params[:contest_id])
-
+    respond_to do |format|
+      if format.json
+        binding.pry
+      end
+    end
     if params[:selectedPhotos].count < 5
       render :index, notice: "Please select 5 photos before submitting"
     else

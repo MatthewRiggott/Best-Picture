@@ -26,7 +26,11 @@
 }
 
 .normalize img {
-  
+
+}
+
+.hidden {
+  display: none;
 }
 
 .right {
