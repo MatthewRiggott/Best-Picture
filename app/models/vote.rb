@@ -8,6 +8,7 @@ class Vote < ActiveRecord::Base
   validates :user, uniqueness: { scope: :contest,
     message: "You can only vote once per contest" }
 
+
   private
 
   def check_votes
