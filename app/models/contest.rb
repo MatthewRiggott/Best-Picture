@@ -13,15 +13,23 @@ class Contest < ActiveRecord::Base
     end
   end
 
-  # This is breaking the app if there's only one contest
-  # def random_contest
-  #   contest_to_vote_on = Contest.all.sample
-  #   if contest_to_vote_on == self
-  #     self.random_contest
-  #   else
-  #     contest_to_vote_on
-  #   end
-  # end
+
+  def self.random_contest(current_user)
+    contests = Contest.where.not(user: current_user ).to_a
+
+    if contests.empty?
+      nil
+    else
+      contests.includes(:user).each do |contest|
+        if contest.user.sex == current_user.sex
+          contests.delete(contest)
+        end
+        contests.empty? ? nil : contests.sample
+      end
+    end
+    binding.pry
+  end
+
 
   def max_pics
     self.photos.count >= 4

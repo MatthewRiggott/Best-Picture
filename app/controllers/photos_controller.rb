@@ -16,8 +16,15 @@ class PhotosController < ApplicationController
         ruby_photo_object = Photo.find(photo.to_i)
         ruby_photo_object.update(contest_id: @contest.id)
       end
-      binding.pry
-      render :back
+      vote_contest = Contest.random_contest(current_user)
+
+      if vote_contest
+        binding.pry
+        redirect_to contest_path(Contest)
+      else
+        binding.pry
+        redirect_to user_path(current_user)
+      end
     end
 
   end
