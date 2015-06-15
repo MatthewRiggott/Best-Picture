@@ -2,12 +2,22 @@
 
 <div class="container">
 	<p class="large-text">Select five photos for your contest.</p>
-	<% if @contest.photos.count == 5 %>
+	<% if @contest.photos.count == 4 %>
 		<h2><%= link_to "Create contest", edit_contest_path(@contest) %></h2>
 	<% end %>
 
 
-		<%= button_tag "Submit", class: "button submit-button hidden", id: "submit-button" %>
+		<%= form_for(@contest) do |f| %>
+
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
 
 
 	<div class="normalize">
@@ -24,7 +34,7 @@ var selectedPhotos = []
 $( function() {
 	$('img').click( function() {
 		$(this).toggleClass('chosen-photo');
-		if ($('.chosen-photo').length === 5) {
+		if ($('.chosen-photo').length === 4) {
 			$('#submit-button').removeClass('hidden')
 		}
 		else {
@@ -33,17 +43,20 @@ $( function() {
 	});
 });
 
-$('.submit-button').click( function() {
+// $('.submit-button').click( function() {
 
-	$('.chosen-photo').each(function(i, obj) {
-		selectedPhotos.push(obj.id)
-	});
+// 	$('.chosen-photo').each(function(i, obj) {
+// 		selectedPhotos.push(obj.id)
+// 	});
 
-	 $.ajax({
-   url: 'photos/1',
-   type: 'PATCH',
-        dataType: 'json',
-        data: { selectedPhotos: selectedPhotos }
-    });
-});
+// 	 $.ajax({
+//    url: '',
+//    type: 'PATCH',
+//    dataType: 'json',
+//    data: { selectedPhotos: selectedPhotos }
+//     });
+
+
+
+// });
 </script>

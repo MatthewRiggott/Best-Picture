@@ -41,10 +41,25 @@ class ContestsController < ApplicationController
   end
 
   def update
-    if @contest.update(contest_params)
-      redirect_to @contest, notice: 'Contest was successfully updated.'
+    # Using edit rather than update because I'm not sure how PATCH requests work with AJAX
+    # You are a noob.
+    binding.pry
+    @contest = Contest.find(params[:contest_id])
+    if params[:selectedPhotos].count != 4
+      render :index, notice: "Please select 4 photos before submitting"
     else
-      render :edit
+      params[:selectedPhotos].each do |photo|
+        ruby_photo_object = Photo.find(photo.to_i)
+        ruby_photo_object.update(contest_id: @contest.id)
+      end
+      vote_contest = Contest.random_contest(current_user)
+
+      if vote_contest
+        redirect_to contest_path(Contest)
+      else
+        binding.pry
+        redirect_to user_path(current_user)
+      end
     end
   end
 
