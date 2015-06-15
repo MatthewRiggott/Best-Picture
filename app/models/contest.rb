@@ -27,7 +27,7 @@ class Contest < ActiveRecord::Base
         contests.empty? ? nil : contests.sample
       end
     end
-    binding.pry
+
   end
 
 
