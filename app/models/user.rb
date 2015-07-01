@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :contests
   has_many :photos
   has_many :votes
+  has_many :archived_contests
 
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
@@ -19,7 +20,6 @@ class User < ActiveRecord::Base
     # Get the identity and user if they exist
     identity = Identity.find_for_oauth(auth)
     user = signed_in_resource ? signed_in_resource : identity.user
-
     if user.nil?
 
       # verify the email -  return email   --    facebook hash       linked in(not used here)      google oauth verified
@@ -34,7 +34,8 @@ class User < ActiveRecord::Base
           #username: auth.info.nickname || auth.uid
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
           password: Devise.friendly_token[0, 20],
-          access: auth.credentials.token
+          access: auth.credentials.token,
+          sex: auth.extra.raw_info.gender
         )
         user.save
 
@@ -47,6 +48,14 @@ class User < ActiveRecord::Base
       identity.save!
     end
     user
+  end
+
+  def opposite
+    if self.sex == "male"
+      "female"
+    else
+      "male"
+    end
   end
 
   def email_verified?
