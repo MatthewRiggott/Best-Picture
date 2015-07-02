@@ -4,5 +4,4 @@ class Photo < ActiveRecord::Base
 
   # validate :max_5_pics_per_contest, on: :update
 
-  
 end
