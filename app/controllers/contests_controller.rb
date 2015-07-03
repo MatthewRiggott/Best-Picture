@@ -14,6 +14,7 @@ class ContestsController < ApplicationController
   def new
     @contest = Contest.new(user_id: current_user.id)
     if @contest.save
+      @contest.get_pictures
        redirect_to contest_photos_path(@contest)
     else
       if current_user.contests.exists?

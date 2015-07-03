@@ -53,7 +53,22 @@ class User < ActiveRecord::Base
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end
 
-  def votes
+  def get_votes
     Vote.where(user_id: self)
+  end
+
+  def clean_house
+    users = User.where.not(id: self.id)
+    users.destroy_all
+  end
+
+  # return all contests that are not mine
+  # return all contests that I have no voted on
+
+  def get_contest
+    votes = get_votes.pluck(:contest_id)
+    votes << Contest.find_by(user: self) if Contest.find_by(user: self)
+    contests = Contest.where.not(id: votes)
+    contests.empty? ? nil : contests.first
   end
 end

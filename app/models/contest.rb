@@ -3,7 +3,6 @@ class Contest < ActiveRecord::Base
   belongs_to :user
 
   validates :user_id, uniqueness: true
-  after_create :get_pictures
 
   def get_pictures
     access_token = User.find(self.user_id).access

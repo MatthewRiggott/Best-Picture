@@ -6,10 +6,11 @@ class VotesController < ApplicationController
       if vote.save
         photo.vote_count += 1
         photo.save
-        # TODO instead of sending them to a random contest after voting, should go to a random contest they *haven't* voted on yet.
-        redirect_to contest_path(Contest.all.sample)
+        next_contest = current_user.get_contest
+        redirect_to contest_path(current_user.get_contest)
       else
-        redirect_to contest_path(Contest.all.sample), notice: vote.errors.messages[:user][0]
+        next_contest = current_user.get_contest
+        redirect_to contest_path(current_user.get_contest), notice: vote.errors.messages[:user][0]
       end
   end
 end
